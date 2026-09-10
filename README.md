@@ -44,7 +44,7 @@ Docker Desktop asks for Rosetta the first time it starts on an Apple Silicon Mac
 softwareupdate --install-rosetta
 ```
 
-Then it configures them. Zsh with Starship. Ghostty with a terminal theme. Real config files for `vim`, `nano` and `tmux` rather than defaults. A handful of macOS settings: where screenshots go, key-repeat speed, a Dock with seven tiles. It creates `~/vaults`, `~/projects` and `~/docker`, with `vlt`, `prj` and `dkr` to jump to them. It sets up your Git identity and a GitHub SSH key, and adds two SSH defaults: `IdentitiesOnly yes`, so a server that counts failed attempts is not offered every key you own, and `SetEnv TERM=xterm-256color`, because Ghostty calls itself `xterm-ghostty` and most servers have never heard of it.
+Then it configures them. Zsh with Starship. Ghostty with a terminal theme. Real config files for `vim`, `nano` and `tmux` rather than defaults. A handful of macOS settings: where screenshots go, key-repeat speed, a plain black desktop, and a Dock with seven tiles plus your Applications folder on the right, drawn as a folder and opening as a grid. Whatever you already had on that side of the Dock stays where it is. It creates `~/vaults`, `~/projects` and `~/docker`, with `vlt`, `prj` and `dkr` to jump to them. It sets up your Git identity and a GitHub SSH key, and adds two SSH defaults: `IdentitiesOnly yes`, so a server that counts failed attempts is not offered every key you own, and `SetEnv TERM=xterm-256color`, because Ghostty calls itself `xterm-ghostty` and most servers have never heard of it.
 
 ## What it writes down
 
