@@ -12,7 +12,7 @@ You do not need to have been in the class, and you do not need to remember anyth
 
 **macOS 26 or newer, and 30 GB of free disk.** It checks both before installing anything. If either fails it tells you what to fix, which beats finding out halfway through.
 
-**About 3.3 GB of downloads.** Measured 2026-09-09 on macOS 26.5.2, Apple Silicon: 3.31 GB, almost all of it Homebrew fetching applications and command-line tools. Your number will drift as versions move. Roughly two thirds of it is the applications, so if you already have Chrome or VS Code or Obsidian, expect less.
+**About 4.2 GB of downloads.** Measured 2026-09-09 on macOS 26.5.2, Apple Silicon: 4.16 GB, almost all of it Homebrew fetching applications and command-line tools. Docker Desktop alone is most of a gigabyte. Your number will drift as versions move, and roughly three quarters of it is the applications, so if you already have Chrome or VS Code or Obsidian, expect less.
 
 **It stops for you twice.** Once for your name and email, which go into your Git config. Once to add an SSH key to your GitHub account, which needs a browser and takes a paste. It also asks for your password once, early, because installing applications requires it.
 
@@ -34,7 +34,15 @@ Press `q` to leave `less`.
 
 ## What it installs
 
-Nine Nerd Fonts, twenty command-line tools including `bat`, `eza`, `fzf`, `gh`, `git`, `go`, `jq`, `node`, `ripgrep`, `rust`, `tmux`, `uv`, `vim` and `zoxide`, and thirteen applications: Ghostty, Chrome, Obsidian, Signal, ChatGPT, Claude, Cursor, VS Code, Antigravity as both CLI and IDE, VLC, Rectangle and KeepingYouAwake.
+Nine Nerd Fonts, twenty command-line tools including `bat`, `eza`, `fzf`, `gh`, `git`, `go`, `jq`, `node`, `ripgrep`, `rust`, `tmux`, `uv`, `vim` and `zoxide`, and sixteen applications: Ghostty, Chrome, Obsidian, Signal, ChatGPT, Claude, Cursor, VS Code, Antigravity as both CLI and IDE, VLC, Rectangle, KeepingYouAwake, Docker Desktop, and the Claude Code and Codex command-line agents.
+
+The two agents are installed and nothing more. Signing in to either happens in a browser against an account only you have, so the tool does not try, does not wait for you, and does not count it against the run. `claude` and `codex` will be on your PATH; logging in is your errand, whenever you want them.
+
+Docker Desktop asks for Rosetta the first time it starts on an Apple Silicon Mac. The tool does not install it, because nothing here runs `softwareupdate` and one recommendation is a thin reason to teach it how. If Docker asks, or if you would rather it never had to:
+
+```bash
+softwareupdate --install-rosetta
+```
 
 Then it configures them. Zsh with Starship. Ghostty with a terminal theme. Real config files for `vim`, `nano` and `tmux` rather than defaults. A handful of macOS settings: where screenshots go, key-repeat speed, a Dock with seven tiles. It creates `~/vaults`, `~/projects` and `~/docker`, with `vlt`, `prj` and `dkr` to jump to them. It sets up your Git identity and a GitHub SSH key, and adds two SSH defaults: `IdentitiesOnly yes`, so a server that counts failed attempts is not offered every key you own, and `SetEnv TERM=xterm-256color`, because Ghostty calls itself `xterm-ghostty` and most servers have never heard of it.
 
@@ -50,12 +58,12 @@ Everything lands in `~/.student-setup/`.
 
 **`backups/`** holds the original of every file that got replaced.
 
-The tool itself unpacks to `~/student-setup`. Run it from there.
+The tool itself unpacks to `~/student-setup`. Note the missing dot: `~/.student-setup` is the record above, `~/student-setup` is the tool. Run it from the second one.
 
 ## Check it worked
 
 ```bash
-cd ~/student-setup && uv run student-setup verify
+cd ~/student-setup && uv run student-setup verify --profile profiles/takehome-core.toml
 ```
 
 This re-runs every check and fixes nothing. It prints one line per check, then a count: `N checks, all passed — ready for labs.`, or how many failed. Run it whenever you like, not only after installing. It is how you find out what has drifted since.
