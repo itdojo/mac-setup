@@ -1,3 +1,5 @@
+![itdojo max — macOS Setup for AI eXperts](mac-setup-hero.jpg)
+
 # mac-setup
 
 Rebuild a Mac the way the course did: one script, every change recorded and reversible.
@@ -12,7 +14,7 @@ You do not need to have been in the class, and you do not need to remember anyth
 
 **macOS 26 or newer, and 30 GB of free disk.** It checks both before installing anything. If either fails it tells you what to fix, which beats finding out halfway through.
 
-**About 4.2 GB of downloads.** Measured 2026-09-09 on macOS 26.5.2, Apple Silicon: 4.16 GB, almost all of it Homebrew fetching applications and command-line tools. Docker Desktop alone is most of a gigabyte. Your number will drift as versions move, and roughly three quarters of it is the applications, so if you already have Chrome or VS Code or Obsidian, expect less.
+**About 4.7 GB of downloads.** Measured 2026-09-10 on macOS 26.5.2, Apple Silicon: 4.71 GB, almost all of it Homebrew fetching applications and command-line tools. Docker Desktop and LM Studio are each most of a gigabyte on their own. Your number will drift as versions move, and roughly three quarters of it is the applications, so if you already have Chrome or VS Code or Obsidian, expect less. **No language models are downloaded** — the two local-model runtimes arrive empty, which is the difference between four gigabytes and forty.
 
 **It stops for you twice.** Once for your name and email, which go into your Git config. Once to add an SSH key to your GitHub account, which needs a browser and takes a paste. It also asks for your password once, early, because installing applications requires it.
 
@@ -34,7 +36,7 @@ Press `q` to leave `less`.
 
 ## What it installs
 
-Nine Nerd Fonts, twenty command-line tools including `bat`, `eza`, `fzf`, `gh`, `git`, `go`, `jq`, `node`, `ripgrep`, `rust`, `tmux`, `uv`, `vim` and `zoxide`, and sixteen applications: Ghostty, Chrome, Obsidian, Signal, ChatGPT, Claude, Cursor, VS Code, Antigravity as both CLI and IDE, VLC, Rectangle, KeepingYouAwake, Docker Desktop, and the Claude Code and Codex command-line agents.
+Nine Nerd Fonts, twenty command-line tools including `bat`, `eza`, `fzf`, `gh`, `git`, `go`, `jq`, `node`, `ripgrep`, `rust`, `tmux`, `uv`, `vim` and `zoxide`, and seventeen applications: Ghostty, Chrome, Obsidian, Signal, ChatGPT, Claude, Cursor, VS Code, Antigravity as both CLI and IDE, VLC, Rectangle, KeepingYouAwake, Docker Desktop, LM Studio, and the Claude Code and Codex command-line agents.
 
 The two agents are installed and nothing more. Signing in to either happens in a browser against an account only you have, so the tool does not try, does not wait for you, and does not count it against the run. `claude` and `codex` will be on your PATH; logging in is your errand, whenever you want them.
 
@@ -43,6 +45,8 @@ Docker Desktop asks for Rosetta the first time it starts on an Apple Silicon Mac
 ```bash
 softwareupdate --install-rosetta
 ```
+
+Two of those run language models on your own machine: LM Studio, with its `lms` command put on your PATH because the application does not do that itself, and Ollama, whose server is started as a background service so `ollama run` and the OpenAI-compatible endpoint on port 11434 answer in a fresh terminal. Both arrive with empty model stores. Nothing here downloads a model — `ollama pull` and `lms get` are yours to run, and a single model is often larger than everything else on this page put together.
 
 Then it configures them. Zsh with Starship. Ghostty with a terminal theme. Real config files for `vim`, `nano` and `tmux` rather than defaults. A handful of macOS settings: where screenshots go, key-repeat speed, a plain black desktop, and a Dock with seven tiles plus your Applications folder on the right, drawn as a folder and opening as a grid. Whatever you already had on that side of the Dock stays where it is. It creates `~/vaults`, `~/projects` and `~/docker`, with `vlt`, `prj` and `dkr` to jump to them. It sets up your Git identity and a GitHub SSH key, and adds two SSH defaults: `IdentitiesOnly yes`, so a server that counts failed attempts is not offered every key you own, and `SetEnv TERM=xterm-256color`, because Ghostty calls itself `xterm-ghostty` and most servers have never heard of it.
 

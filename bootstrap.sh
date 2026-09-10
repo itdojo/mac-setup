@@ -69,7 +69,7 @@ ARCH="$(uname -m)"
 # Everything below is overridable from the environment, so a second course or
 # a second build does not need a second copy of this script. The flags in
 # `parse_args` override the environment in turn.
-TOOL_VERSION="${STUDENT_SETUP_VERSION:-2026.09.03}"
+TOOL_VERSION="${STUDENT_SETUP_VERSION:-2026.09.04}"
 
 # The public Releases are this script's mirror. Two files live there, the tool
 # tarball and Homebrew's installer, each with a .sha256 beside it. That is the
@@ -86,7 +86,7 @@ TOOL_VERSION="${STUDENT_SETUP_VERSION:-2026.09.03}"
 # STUDENT_SETUP_MIRROR asks the old tag's release for a filename it never
 # published — a loud 404, not a silently wrong build, but a coupling worth
 # knowing about before typing either override alone.
-MIRROR="${STUDENT_SETUP_MIRROR:-https://github.com/itdojo/mac-setup/releases/download/2026.09.03}"
+MIRROR="${STUDENT_SETUP_MIRROR:-https://github.com/itdojo/mac-setup/releases/download/2026.09.04}"
 
 # Seconds to wait for the mirror to answer. A GitHub Release that is there
 # answers at once; this bounds how long a run waits on one that is not, since
